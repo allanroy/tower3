@@ -1,1 +1,17 @@
 ---
+- hosts: all
+  become: yes
+  vars:
+    username: test1
+    fullname: 'Test One'
+
+  tasks:
+  - name: Creating the user {{ username }}
+    user:
+      name: "{{ username }}"
+      password:  "{{ 'Mto$12345' | password_hash('sha512') }}"
+      comment: "{{ fullname }}"
+      shell: /bin/bash
+      group: tso
+      groups: wheel
+      home: /home/{{ username }}
