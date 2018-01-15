@@ -2,8 +2,8 @@
 - hosts: all
   become: yes
   vars:
-    username: test1
-    fullname: 'Test One'
+    username: test2
+    fullname: 'Test Two'
 
   tasks:
   - name: Creating the user {{ username }}
