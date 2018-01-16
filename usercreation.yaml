@@ -1,17 +1,17 @@
 ---
 - hosts: all
   become: yes
-  vars:
-    username: test2
-    fullname: 'Test Two'
-
+  
   tasks:
-  - name: Creating the user {{ username }}
+  - name: Creating the user {{ item.name }}
     user:
-      name: "{{ username }}"
+      name: "{{ item.name }}"
       password:  "{{ 'Abc$12345' | password_hash('sha512') }}"
-      comment: "{{ fullname }}"
+      comment: "{{ item.comment }}"
       shell: /bin/bash
       group: tso
       groups: wheel
-      home: /home/{{ username }}
+      home: /home/{{ item.name }}
+    with_items:
+      - { name: 'test1', comment: 'Test One' }
+      - { name: 'test2', comment: 'Test Two' }
