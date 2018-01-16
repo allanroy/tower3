@@ -3,7 +3,7 @@
   become: yes
   
   tasks:
-  - name: Creating the user {{ item.name }}
+  - name: Creating the users.
     user:
       name: "{{ item.name }}"
       password:  "{{ 'Abc$12345' | password_hash('sha512') }}"
